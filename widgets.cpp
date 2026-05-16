@@ -3,7 +3,7 @@
 #include "app.hpp"
 using namespace genv;
 
-Widget::Widget(App *parent, int x, int y, int sx, int sy) :_parent(parent), _x(x), _y(y), _size_x(sx), _size_y(sy)
+Widget::Widget(App *parent, int x, int y, int sx, int sy) :_parent(parent), _x(x), _y(y), _size_x(sx), _size_y(sy), _focused(false)
 {
     _parent->register_widget(this);
 }

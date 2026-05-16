@@ -8,10 +8,13 @@ class App;
 class Widget {
 protected:
     int _x, _y, _size_x, _size_y;
+    bool _focused;
     App * _parent;
 public:
     Widget(App *, int x, int y, int sx, int sy);
     virtual bool is_selected(int mouse_x, int mouse_y);
+    virtual void set_focus(bool f) {_focused = f;}
+    virtual bool is_focused() const{return _focused;}
     virtual void draw() = 0;
     virtual void handle(genv::event ev) = 0;
 };
