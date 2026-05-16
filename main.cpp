@@ -10,11 +10,9 @@ class MyApp : public App{
 protected:
     vector<Widget *> _w;
 public:
-    MyApp(){
+    MyApp(){}
 
-    }
-
-    void action(){}
+    void action(string s){}
 
     vector<Widget *> getw(){
         return _w;
