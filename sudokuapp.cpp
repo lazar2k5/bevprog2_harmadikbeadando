@@ -1,14 +1,19 @@
 #include "sudokuapp.hpp"
 #include <iostream>
+#include "button.hpp"
 using namespace std;
 using namespace genv;
 
 SudokuApp::SudokuApp() {
-    gout.open(550, 550);
+    gout.open(750, 550);
 
     int cell_size = 50;
     int offset_x = 50;
     int offset_y = 50;
+
+    new Button(this, 520, 40,  200, 40, "1. Palya (Konnyu)",  "palya_1");
+    new Button(this, 520, 100, 200, 40, "2. Palya (Kozepes)", "palya_2");
+    new Button(this, 520, 160, 200, 40, "3. Palya (Nehez)",   "palya_3");
 
     for (int row = 0; row < 9; ++row) {
         for (int col = 0; col < 9; ++col) {
@@ -20,40 +25,49 @@ SudokuApp::SudokuApp() {
         }
     }
 
-    _logic.set_value(0,0,5); _cells[0][0] ->set_value(5); _cells[0][0] ->set_fixed(true);
-    _logic.set_value(0,1,3); _cells[0][1] ->set_value(3); _cells[0][1]->set_fixed(true);
-
     if(_logic.load_from_file("palya1.txt")){
-        for (int row = 0; row < 9; ++row) {
-            for (int col = 0; col < 9; ++col) {
-                int var = _logic.get_value(row, col);
-                _cells[row][col]->set_value(var);
-
-                if(var != 0){
-                    _cells[row][col]->set_fixed(true);
-                } else{
-                    _cells[row][col]->set_fixed(false);
-                }
-            }
-        }
-    } else
-        std::cout << "Hiba: Nem talalhato a palya1.txt fajl!" << std::endl;
+        sync_board();
+    }
 }
 
-void SudokuApp::action(std::string id){
-    for (int row = 0; row < 9; ++row) {
-        for (int col = 0; col < 9; ++col) {
-            int widget_value = _cells[row][col]->get_value();
+void SudokuApp::action(std::string id) {
 
-            if(widget_value != _logic.get_value(row, col))
-                _logic.set_value(row, col, widget_value);
+    if (id == "palya_1" || id == "palya_2" || id == "palya_3") {
+
+        std::string selected_file = "";
+        if (id == "palya_1") selected_file = "palya1.txt";
+        if (id == "palya_2") selected_file = "palya2.txt";
+        if (id == "palya_3") selected_file = "palya3.txt";
+
+        if(_logic.load_from_file(selected_file)) {
+            sync_board();
+        } else {
+            std::cout << "Nem talalom a filet: " << selected_file << std::endl;
         }
     }
+    else if(id == "valtozas_tortent") {
+        for (int row = 0; row < 9; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                int widget_value = _cells[row][col]->get_value();
+                if(widget_value != _logic.get_value(row, col))
+                    _logic.set_value(row, col, widget_value);
+            }
+        }
+        for (int row = 0; row < 9; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                _cells[row][col]->set_conflict(_logic.has_conflict(row, col));
+            }
+        }
+    }
+}
 
+void SudokuApp::sync_board(){
     for (int row = 0; row < 9; ++row) {
         for (int col = 0; col < 9; ++col) {
-            bool is_bad = _logic.has_conflict(row, col);
-            _cells[row][col]->set_conflict(is_bad);
+            int var = _logic.get_value(row, col);
+            _cells[row][col]->set_value(var);
+            _cells[row][col]->set_fixed(var != 0);
+            _cells[row][col]->set_conflict(_logic.has_conflict(row, col));
         }
     }
 }

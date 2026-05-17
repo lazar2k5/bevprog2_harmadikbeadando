@@ -9,6 +9,7 @@ protected:
     int _value;
     bool _is_fixed;
     bool _has_conflict;
+    bool _is_won;
 public:
     SudokuCell(App* parent, int, int, int);
     virtual void draw() override;
@@ -19,6 +20,7 @@ public:
     void set_fixed(bool f){_is_fixed = f;}
     bool has_conflict() const{return _has_conflict;}
     void set_conflict(bool c){_has_conflict = c;}
+    void set_won(bool won) {_is_won = won;}
 };
 
 #endif // SUDOKUCELL_HPP

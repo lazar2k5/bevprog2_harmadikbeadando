@@ -11,7 +11,9 @@ SudokuCell::SudokuCell(App* parent, int x, int y, int size)
 }
 
 void SudokuCell::draw() {
-    if(_has_conflict){
+    if(_is_won)
+        gout << color(100,255,100);
+    else if(_has_conflict){
         gout << color(255,100,100);
     } else if(_is_fixed){
         gout << color(200,200,200);

@@ -14,6 +14,8 @@ public:
     SudokuApp();
 
     void action(std::string) override;
+    void check_victory();
+    void sync_board();
 };
 
 #endif // SUDOKUAPP_HPP

@@ -19,6 +19,5 @@ public:
     virtual void handle(genv::event ev) = 0;
 };
 
-                                                                                                                                                                                                                                                                  //szeretnek pontlevonast kerni a beadandomra mert feltoltottem egy oktatasi segedletet sajat munka helyett :)
 
 #endif // WIDGETS_HPP_INCLUDED
