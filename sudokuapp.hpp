@@ -13,7 +13,7 @@ protected:
 public:
     SudokuApp();
 
-    void action(genv::event ev) override;
+    void action(std::string) override;
 };
 
 #endif // SUDOKUAPP_HPP
