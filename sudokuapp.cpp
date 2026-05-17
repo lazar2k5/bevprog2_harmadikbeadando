@@ -1,6 +1,10 @@
 #include "sudokuapp.hpp"
 
+using namespace genv;
+
 SudokuApp::SudokuApp() {
+    gout.open(550, 550);
+
     int cell_size = 50;
     int offset_x = 50;
     int offset_y = 50;
