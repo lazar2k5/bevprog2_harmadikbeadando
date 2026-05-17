@@ -1,5 +1,6 @@
 #include "sudokuapp.hpp"
-
+#include <iostream>
+using namespace std;
 using namespace genv;
 
 SudokuApp::SudokuApp() {
@@ -21,6 +22,22 @@ SudokuApp::SudokuApp() {
 
     _logic.set_value(0,0,5); _cells[0][0] ->set_value(5); _cells[0][0] ->set_fixed(true);
     _logic.set_value(0,1,3); _cells[0][1] ->set_value(3); _cells[0][1]->set_fixed(true);
+
+    if(_logic.load_from_file("palya1.txt")){
+        for (int row = 0; row < 9; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                int var = _logic.get_value(row, col);
+                _cells[row][col]->set_value(var);
+
+                if(var != 0){
+                    _cells[row][col]->set_fixed(true);
+                } else{
+                    _cells[row][col]->set_fixed(false);
+                }
+            }
+        }
+    } else
+        std::cout << "Hiba: Nem talalhato a palya1.txt fajl!" << std::endl;
 }
 
 void SudokuApp::action(std::string id){

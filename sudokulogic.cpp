@@ -77,8 +77,8 @@ void SudokuLogic::_update_conflicts() {
             int start_i = (i / 3) * 3;
             int start_j = (j / 3) * 3;
 
-            for (int k = 0; k < start_i +3; ++k) {
-                for (int l = 0; l < start_j + 3; ++l) {
+            for (int k = start_i; k < start_i +3; ++k) {
+                for (int l = start_j; l < start_j + 3; ++l) {
                     if((k != i || l != j) && _board[k][l] == var)
                         _conflict[i][j] = true;
                 }

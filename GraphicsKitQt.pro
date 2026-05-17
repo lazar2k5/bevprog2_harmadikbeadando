@@ -35,3 +35,6 @@ HEADERS += \
     sudokucell.hpp \
     sudokulogic.hpp \
     widgets.hpp
+
+DISTFILES += \
+    palya1.txt
