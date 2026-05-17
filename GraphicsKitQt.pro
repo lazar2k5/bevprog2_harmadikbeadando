@@ -5,7 +5,7 @@ CONFIG -= qt
 
 SOURCES += \
         app.cpp \
-        dropdown.cpp \
+        button.cpp \
         graphics/graphics.cpp \
         main.cpp \
         sudokuapp.cpp \
@@ -31,7 +31,7 @@ DEPENDPATH += $$PWD/SDL2
 
 HEADERS += \
     app.hpp \
-    dropdown.hpp \
+    button.hpp \
     graphics.hpp \
     sudokuapp.hpp \
     sudokucell.hpp \
